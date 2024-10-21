@@ -1,5 +1,23 @@
 package io.quarkiverse.jdbc.singlestore.deployment;
 
+import static io.quarkus.datasource.deployment.spi.DatabaseDefaultSetupConfig.DEFAULT_DATABASE_NAME;
+import static io.quarkus.datasource.deployment.spi.DatabaseDefaultSetupConfig.DEFAULT_DATABASE_PASSWORD;
+import static io.quarkus.datasource.deployment.spi.DatabaseDefaultSetupConfig.DEFAULT_DATABASE_USERNAME;
+import static org.testcontainers.shaded.org.awaitility.Awaitility.await;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.time.Duration;
+import java.util.List;
+import java.util.Optional;
+import java.util.OptionalInt;
+
+import org.jboss.logging.Logger;
+import org.testcontainers.utility.DockerImageName;
+import org.testcontainers.utility.MountableFile;
+
 import io.quarkiverse.jdbc.singlestore.runtime.SinglestoreConstants;
 import io.quarkus.datasource.common.runtime.DataSourceUtil;
 import io.quarkus.datasource.deployment.spi.DevServicesDatasourceContainerConfig;
@@ -13,23 +31,6 @@ import io.quarkus.devservices.common.ContainerShutdownCloseable;
 import io.quarkus.devservices.common.Labels;
 import io.quarkus.devservices.common.Volumes;
 import io.quarkus.runtime.LaunchMode;
-import org.jboss.logging.Logger;
-import org.testcontainers.utility.DockerImageName;
-import org.testcontainers.utility.MountableFile;
-
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.time.Duration;
-import java.util.List;
-import java.util.Optional;
-import java.util.OptionalInt;
-
-import static io.quarkus.datasource.deployment.spi.DatabaseDefaultSetupConfig.DEFAULT_DATABASE_NAME;
-import static io.quarkus.datasource.deployment.spi.DatabaseDefaultSetupConfig.DEFAULT_DATABASE_PASSWORD;
-import static io.quarkus.datasource.deployment.spi.DatabaseDefaultSetupConfig.DEFAULT_DATABASE_USERNAME;
-import static org.testcontainers.shaded.org.awaitility.Awaitility.await;
 
 public class SinglestoreDevServicesProcessor {
 

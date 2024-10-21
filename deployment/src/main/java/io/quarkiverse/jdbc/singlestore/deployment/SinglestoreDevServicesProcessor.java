@@ -77,7 +77,8 @@ public class SinglestoreDevServicesProcessor {
                     File dbUserSqlFile = dbUserSql.toFile();
                     dbUserSqlFile.deleteOnExit();
                     container.withCreateContainerCmdModifier(it -> HostConfig.newHostConfig().withCapAdd(Capability.SYS_ADMIN)
-                            .withSecurityOpts(List.of("apparmor:unconfined")));
+                            .withSecurityOpts(
+                                    List.of("apparmor:unconfined", "label=disable", "seccomp=unconfined", "unmask=all")));
                     container.withFileSystemBind(dbUserSqlFile.getAbsolutePath(), "/init.sql", BindMode.READ_ONLY);
                     //                    container.withPrivilegedMode(true);
                 } catch (IOException e) {

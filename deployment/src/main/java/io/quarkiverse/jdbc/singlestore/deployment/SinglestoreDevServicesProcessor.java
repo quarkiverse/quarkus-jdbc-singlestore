@@ -15,7 +15,6 @@ import java.util.Optional;
 import java.util.OptionalInt;
 
 import org.jboss.logging.Logger;
-import org.testcontainers.containers.BindMode;
 import org.testcontainers.utility.DockerImageName;
 
 import io.quarkiverse.jdbc.singlestore.runtime.SinglestoreConstants;

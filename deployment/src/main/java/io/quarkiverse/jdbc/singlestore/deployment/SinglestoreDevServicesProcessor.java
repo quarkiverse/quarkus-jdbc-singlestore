@@ -73,7 +73,8 @@ public class SinglestoreDevServicesProcessor {
                     Files.write(dbUserSql, buf);
                     File dbUserSqlFile = dbUserSql.toFile();
                     dbUserSqlFile.deleteOnExit();
-                    container.withFileSystemBind(dbUserSqlFile.getAbsolutePath(), "/init.sql:z", BindMode.READ_ONLY);
+                    dbUserSqlFile.setExecutable(true,false);
+                    container.withFileSystemBind(dbUserSqlFile.getAbsolutePath(), "/init.sql", BindMode.READ_ONLY);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

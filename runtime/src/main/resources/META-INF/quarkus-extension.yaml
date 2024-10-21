@@ -6,7 +6,7 @@ metadata:
     - "jdbc-singlestore"
     - "jdbc"
     - "singlestore"
-  guide: "https://quarkus.io/guides/datasource"
+  guide: "https://docs.quarkiverse.io/quarkus-jdbc-singlestore/dev/"
   categories:
     - "data"
-  status: "stable"
+  status: "preview"

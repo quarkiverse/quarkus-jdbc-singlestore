@@ -43,7 +43,6 @@ public class SinglestoreDevServicesProcessor {
             List<DevServicesSharedNetworkBuildItem> devServicesSharedNetworkBuildItem,
             GlobalDevServicesConfig globalDevServicesConfig) {
         return new DevServicesDatasourceProviderBuildItem(SinglestoreConstants.DB_KIND, new DevServicesDatasourceProvider() {
-            @SuppressWarnings("unchecked")
             @Override
             public RunningDevServicesDatasource startDatabase(Optional<String> username, Optional<String> password,
                     String datasourceName, DevServicesDatasourceContainerConfig containerConfig,
@@ -74,7 +73,7 @@ public class SinglestoreDevServicesProcessor {
                     Files.write(dbUserSql, buf);
                     File dbUserSqlFile = dbUserSql.toFile();
                     dbUserSqlFile.deleteOnExit();
-                    container.withFileSystemBind(dbUserSqlFile.getAbsolutePath(), "/init.sql", BindMode.READ_ONLY);
+                    container.withFileSystemBind(dbUserSqlFile.getAbsolutePath(), "/init.sql:z", BindMode.READ_ONLY);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

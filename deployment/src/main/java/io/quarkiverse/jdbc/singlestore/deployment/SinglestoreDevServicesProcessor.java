@@ -15,8 +15,8 @@ import java.util.Optional;
 import java.util.OptionalInt;
 
 import org.jboss.logging.Logger;
+import org.testcontainers.containers.BindMode;
 import org.testcontainers.utility.DockerImageName;
-import org.testcontainers.utility.MountableFile;
 
 import io.quarkiverse.jdbc.singlestore.runtime.SinglestoreConstants;
 import io.quarkus.datasource.common.runtime.DataSourceUtil;
@@ -73,8 +73,8 @@ public class SinglestoreDevServicesProcessor {
                     Files.write(dbUserSql, buf);
                     File dbUserSqlFile = dbUserSql.toFile();
                     dbUserSqlFile.deleteOnExit();
-                    //                    container.withFileSystemBind(dbUserSqlFile.getAbsolutePath(), "/init.sql", BindMode.READ_ONLY);
-                    container.copyFileToContainer(MountableFile.forHostPath(dbUserSql), "/init.sql");
+                    container.withFileSystemBind(dbUserSqlFile.getAbsolutePath(), "/init.sql", BindMode.READ_ONLY);
+                    container.withPrivilegedMode(true);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

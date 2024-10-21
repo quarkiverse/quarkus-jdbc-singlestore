@@ -1,0 +1,5 @@
+name: quarkus-jdbc-singlestore
+title: Jdbc Singlestore
+version: dev
+nav:
+  - modules/ROOT/nav.adoc

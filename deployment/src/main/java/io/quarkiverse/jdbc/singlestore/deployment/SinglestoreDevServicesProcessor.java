@@ -18,6 +18,9 @@ import org.jboss.logging.Logger;
 import org.testcontainers.containers.BindMode;
 import org.testcontainers.utility.DockerImageName;
 
+import com.github.dockerjava.api.model.Capability;
+import com.github.dockerjava.api.model.HostConfig;
+
 import io.quarkiverse.jdbc.singlestore.runtime.SinglestoreConstants;
 import io.quarkus.datasource.common.runtime.DataSourceUtil;
 import io.quarkus.datasource.deployment.spi.DevServicesDatasourceContainerConfig;
@@ -74,7 +77,8 @@ public class SinglestoreDevServicesProcessor {
                     File dbUserSqlFile = dbUserSql.toFile();
                     dbUserSqlFile.deleteOnExit();
                     container.withFileSystemBind(dbUserSqlFile.getAbsolutePath(), "/init.sql", BindMode.READ_ONLY);
-                    container.withPrivilegedMode(true);
+                    //                    container.withPrivilegedMode(true);
+                    container.withCreateContainerCmdModifier(it -> HostConfig.newHostConfig().withCapAdd(Capability.SYS_ADMIN));
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

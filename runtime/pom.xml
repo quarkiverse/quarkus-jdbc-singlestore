@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>io.quarkiverse.jdbc-singlestore</groupId>
+        <groupId>io.quarkiverse.jdbc</groupId>
         <artifactId>quarkus-jdbc-singlestore-parent</artifactId>
         <version>999-SNAPSHOT</version>
     </parent>
@@ -15,6 +15,30 @@
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-arc</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-agroal</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.singlestore</groupId>
+            <artifactId>singlestore-jdbc-client</artifactId>
+            <version>${singlestore-jdbc.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.graalvm.sdk</groupId>
+            <artifactId>nativeimage</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-kubernetes-service-binding</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-community-dialects</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -23,6 +47,11 @@
                 <groupId>io.quarkus</groupId>
                 <artifactId>quarkus-extension-maven-plugin</artifactId>
                 <version>${quarkus.version}</version>
+                <configuration>
+                    <parentFirstArtifacts>
+                        <parentFirstArtifact>com.singlestore:singlestore-jdbc-client</parentFirstArtifact>
+                    </parentFirstArtifacts>
+                </configuration>
                 <executions>
                     <execution>
                         <phase>compile</phase>

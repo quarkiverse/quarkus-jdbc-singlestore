@@ -1,1 +1,2 @@
-* xref:index.adoc[Getting started]
+* xref:index.adoc[Introduction]
+* xref:datasource.adoc[Configuring the datasource]

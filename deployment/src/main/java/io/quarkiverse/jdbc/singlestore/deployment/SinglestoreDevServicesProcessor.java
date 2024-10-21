@@ -5,21 +5,16 @@ import static io.quarkus.datasource.deployment.spi.DatabaseDefaultSetupConfig.DE
 import static io.quarkus.datasource.deployment.spi.DatabaseDefaultSetupConfig.DEFAULT_DATABASE_USERNAME;
 import static org.testcontainers.shaded.org.awaitility.Awaitility.await;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
 import java.util.OptionalInt;
 
 import org.jboss.logging.Logger;
-import org.testcontainers.containers.BindMode;
 import org.testcontainers.utility.DockerImageName;
-
-import com.github.dockerjava.api.model.Capability;
-import com.github.dockerjava.api.model.HostConfig;
 
 import io.quarkiverse.jdbc.singlestore.runtime.SinglestoreConstants;
 import io.quarkus.datasource.common.runtime.DataSourceUtil;
@@ -53,7 +48,6 @@ public class SinglestoreDevServicesProcessor {
 
                 boolean useSharedNetwork = DevServicesSharedNetworkBuildItem.isSharedNetworkRequired(globalDevServicesConfig,
                         devServicesSharedNetworkBuildItem);
-                //                boolean useSharedNetwork = false;
                 QuarkusSinglestoreContainer container = new QuarkusSinglestoreContainer(containerConfig.getImageName(),
                         containerConfig.getFixedExposedPort(),
                         useSharedNetwork);
@@ -64,26 +58,6 @@ public class SinglestoreDevServicesProcessor {
                 String effectiveDbName = containerConfig.getDbName().orElse(
                         DataSourceUtil.isDefault(datasourceName) ? DEFAULT_DATABASE_NAME : datasourceName);
 
-                try {
-                    Path dbUserSql = Files.createTempFile("init-", ".sql");
-                    // Writing data here
-                    String dbUserScript = String.format("""
-                            CREATE DATABASE IF NOT EXISTS '%s';
-                            CREATE USER %s@'%%' identified by '%s';
-                            GRANT ALL ON * to '%s';""", effectiveDbName, effectiveUsername, effectivePassword,
-                            effectiveUsername);
-                    byte[] buf = dbUserScript.getBytes();
-                    Files.write(dbUserSql, buf);
-                    File dbUserSqlFile = dbUserSql.toFile();
-                    dbUserSqlFile.deleteOnExit();
-                    container.withCreateContainerCmdModifier(it -> HostConfig.newHostConfig().withCapAdd(Capability.SYS_ADMIN)
-                            .withSecurityOpts(
-                                    List.of("apparmor:unconfined", "label=disable", "seccomp=unconfined", "unmask=all")));
-                    container.withFileSystemBind(dbUserSqlFile.getAbsolutePath(), "/init.sql", BindMode.READ_ONLY);
-                    //                    container.withPrivilegedMode(true);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
                 container
                         .withReuse(containerConfig.isReuse());
                 Labels.addDataSourceLabel(container, datasourceName);
@@ -98,9 +72,22 @@ public class SinglestoreDevServicesProcessor {
                 container.start();
                 await().until(container::isHealthy);
 
+                try (Connection connection = container.createConnection("");
+                        Statement statement = connection.createStatement()) {
+                    //                    container.execInContainer("singlestore", "-p${ROOT_PASSWORD}" ,"<", "/user.sql");
+                    connection.setAutoCommit(false);
+                    statement.addBatch(String.format("CREATE DATABASE IF NOT EXISTS '%s';", effectiveDbName));//inserting Query in stmt
+                    statement.addBatch(
+                            String.format("CREATE USER %s@'%%' identified by '%s';", effectiveUsername, effectivePassword));
+                    statement.addBatch(String.format("GRANT ALL ON * to '%s';", effectiveUsername));
+                    statement.executeBatch();
+                    LOG.info("User is created.");
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+
                 // Set the real dbNAme, once user is created.
-                container
-                        .withDatabaseName(effectiveDbName);
+                container.withDatabaseName(effectiveDbName);
                 LOG.info("Dev Services for Singlestore started.");
 
                 return new RunningDevServicesDatasource(container.getContainerId(),

@@ -31,6 +31,7 @@ import io.quarkus.devservices.common.ContainerShutdownCloseable;
 import io.quarkus.devservices.common.Labels;
 import io.quarkus.devservices.common.Volumes;
 import io.quarkus.runtime.LaunchMode;
+import org.testcontainers.utility.MountableFile;
 
 public class SinglestoreDevServicesProcessor {
 
@@ -73,8 +74,8 @@ public class SinglestoreDevServicesProcessor {
                     Files.write(dbUserSql, buf);
                     File dbUserSqlFile = dbUserSql.toFile();
                     dbUserSqlFile.deleteOnExit();
-                    dbUserSqlFile.setExecutable(true, false);
-                    container.withFileSystemBind(dbUserSqlFile.getAbsolutePath(), "/init.sql", BindMode.READ_ONLY);
+                    //                    container.withFileSystemBind(dbUserSqlFile.getAbsolutePath(), "/init.sql", BindMode.READ_ONLY);
+                    container.copyFileToContainer(MountableFile.forHostPath(dbUserSql), "/init.sql");
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

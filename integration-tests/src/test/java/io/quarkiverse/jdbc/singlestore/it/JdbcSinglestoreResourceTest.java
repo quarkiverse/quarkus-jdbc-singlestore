@@ -13,9 +13,19 @@ public class JdbcSinglestoreResourceTest {
     @Test
     public void testHelloEndpoint() {
         given()
-                .when().get("/jdbc-singlestore")
+                .when().get("/jdbc-singlestore/agroal")
                 .then()
                 .statusCode(200)
-                .body(is("Hello jdbc-singlestore"));
+                .body(is("1/leo/"));
+    }
+
+    @Test
+    public void testAgoralEndpoint() {
+        given()
+                .when().get("/jdbc-singlestore/connection")
+                .then()
+                .statusCode(200)
+                .body(is("1/leo/"));
+
     }
 }

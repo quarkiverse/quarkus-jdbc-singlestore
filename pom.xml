@@ -7,7 +7,7 @@
         <artifactId>quarkiverse-parent</artifactId>
         <version>18</version>
     </parent>
-    <groupId>io.quarkiverse.jdbc-singlestore</groupId>
+    <groupId>io.quarkiverse.jdbc</groupId>
     <artifactId>quarkus-jdbc-singlestore-parent</artifactId>
     <version>999-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -22,6 +22,7 @@
         <connection>scm:git:git@github.com:quarkiverse/quarkus-jdbc-singlestore.git</connection>
         <developerConnection>scm:git:git@github.com:quarkiverse/quarkus-jdbc-singlestore.git</developerConnection>
         <url>https://github.com/quarkiverse/quarkus-jdbc-singlestore</url>
+        <tag>HEAD</tag>
     </scm>
 
     <properties>
@@ -30,6 +31,12 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <quarkus.version>3.15.1</quarkus.version>
+<!--        <quarkus.doc.plugin.version>3.15.1</quarkus.doc.plugin.version>-->
+        <singlestore-jdbc.version>1.2.4</singlestore-jdbc.version>
+        <assertj-core.version>3.26.3</assertj-core.version>
+        <rest-assured.version>5.5.0</rest-assured.version>
+        <testcontainers.version>1.20.2</testcontainers.version>
+        <maven-surefire-plugin.version>3.5.0</maven-surefire-plugin.version>
     </properties>
 
     <dependencyManagement>

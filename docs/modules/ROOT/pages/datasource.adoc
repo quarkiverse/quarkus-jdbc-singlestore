@@ -1,0 +1,27 @@
+= Configuring the datasource
+
+== Datasource
+
+You can find all the information about how to configure a datasource in Quarkus in https://quarkus.io/guides/datasource[the official Quarkus documentation].
+
+The `db-kind` used by this extension is `singlestore` so a configuration defining a default Singlestore datasource looks like:
+
+[source,properties]
+----
+quarkus.datasource.db-kind=singlestore
+quarkus.datasource.jdbc.url=... <1>
+----
+<1> See below for Singlestore JDBC URLs.
+
+== JDBC URL
+
+You can specify connection details using the JDBC URL, or use the defaults.
+
+An Singlestore JDBC URL looks like the following:
+
+`jdbc:singlestore:[replication:|loadbalance:|sequential:]//<hostDescription>[,<hostDescription>...]/[database][?<key1>=<value1>[&<key2>=<value2>]] `
+
+Example:: `"jdbc:singlestore://localhost:3306/test?user=root&password=myPassword"`
+jdbc:singlestore://localhost:49802/?user=root&password=***&connectionAttributes=program_name:DbVis_DbVisualizer
+
+The https://github.com/memsql/S2-JDBC-Connector[official documentation]

@@ -32,7 +32,7 @@ public class OverrideJdbcUrlBuildTimeConfigSource extends MapBackedConfigSource 
         }
 
         if (isBuildTime) {
-            return "${sqlite.url}";
+            return "${singlestore.url}";
         }
 
         return super.getValue(propertyName);

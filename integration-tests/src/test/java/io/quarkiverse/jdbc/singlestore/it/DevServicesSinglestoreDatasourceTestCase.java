@@ -1,11 +1,9 @@
 package io.quarkiverse.jdbc.singlestore.it;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.assertj.core.api.Assertions.assertThatCode;
 
-import java.sql.Connection;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
 
@@ -41,21 +39,15 @@ public class DevServicesSinglestoreDatasourceTestCase {
     AgroalDataSource dataSource;
 
     @Test
-    public void testDatasource() throws Exception {
-        AgroalConnectionPoolConfiguration configuration = null;
-
-        try {
-            configuration = dataSource.getConfiguration().connectionPoolConfiguration();
-        } catch (NullPointerException e) {
-            // we catch the NPE here as we have a proxycd and we can't test dataSource directly
-            fail("Datasource should not be null");
-        }
-        assertTrue(configuration.connectionFactoryConfiguration().jdbcUrl().contains("jdbc:singlestore:"));
-        assertEquals("quarkus", configuration.connectionFactoryConfiguration().principal().getName());
-        assertEquals(20, configuration.maxSize());
+    public void testDatasource() {
+        final AtomicReference<AgroalConnectionPoolConfiguration> reference = new AtomicReference<>();
+        assertThatCode(() -> reference.getAndSet(dataSource.getConfiguration().connectionPoolConfiguration()))
+                .doesNotThrowAnyException();
+        AgroalConnectionPoolConfiguration configuration = reference.get();
+        assertThat(configuration.connectionFactoryConfiguration().jdbcUrl()).contains("jdbc:singlestore:");
+        assertThat(configuration.connectionFactoryConfiguration().principal().getName()).isEqualTo("quarkus");
+        assertThat(configuration.maxSize()).isEqualTo(20);
         assertThat(configuration.exceptionSorter()).isInstanceOf(MySQLExceptionSorter.class);
-
-        try (Connection connection = dataSource.getConnection()) {
-        }
+        assertThatCode(() -> dataSource.getConnection().close()).doesNotThrowAnyException();
     }
 }

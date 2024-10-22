@@ -26,17 +26,9 @@
     </scm>
 
     <properties>
-        <compiler-plugin.version>3.13.0</compiler-plugin.version>
-        <maven.compiler.release>17</maven.compiler.release>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <quarkus.version>3.15.1</quarkus.version>
-<!--        <quarkus.doc.plugin.version>3.15.1</quarkus.doc.plugin.version>-->
         <singlestore-jdbc.version>1.2.4</singlestore-jdbc.version>
         <assertj-core.version>3.26.3</assertj-core.version>
-        <rest-assured.version>5.5.0</rest-assured.version>
-        <testcontainers.version>1.20.2</testcontainers.version>
-        <maven-surefire-plugin.version>3.5.0</maven-surefire-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -48,6 +40,16 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <dependency>
+                <groupId>io.quarkiverse.jdbc</groupId>
+                <artifactId>quarkus-jdbc-singlestore</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-core</artifactId>
+                <version>${assertj-core.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -58,13 +60,6 @@
                     <groupId>io.quarkus</groupId>
                     <artifactId>quarkus-maven-plugin</artifactId>
                     <version>${quarkus.version}</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>${compiler-plugin.version}</version>
-                    <configuration>
-                        <parameters>true</parameters>
-                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>io.quarkus</groupId>

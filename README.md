@@ -16,7 +16,7 @@ Add the following dependency in your pom.xml to get started,
 ```xml
 <dependency>
     <groupId>io.quarkiverse.jdbc</groupId>
-    <artifactId>quarkus-jdb-singlestore</artifactId>
+    <artifactId>quarkus-jdbc-singlestore</artifactId>
 </dependency>
 ```
 

@@ -1,0 +1,27 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "commitType": "docs",
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "Hemantkumar-Chigadani",
+      "name": "Hemantkumar Chigadani",
+      "avatar_url": "https://avatars.githubusercontent.com/u/12896715?v=4",
+      "profile": "https://uk.linkedin.com/in/hchigadani",
+      "contributions": [
+        "code",
+        "maintenance"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "skipCi": true,
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "projectName": "quarkus-jdbc-singlestore",
+  "projectOwner": "quarkiverse"
+}

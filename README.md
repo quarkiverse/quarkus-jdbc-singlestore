@@ -22,7 +22,7 @@ Add the following dependency in your pom.xml to get started,
 
 ## User Documentation
 
-https://docs.quarkiverse.io/quarkus-jdbc-singlestoredev/index.html
+https://docs.quarkiverse.io/quarkus-jdbc-singlestore/dev/index.html
 
 ## Contributors ✨
 

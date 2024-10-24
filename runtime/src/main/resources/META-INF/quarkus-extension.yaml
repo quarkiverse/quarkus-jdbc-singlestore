@@ -1,6 +1,7 @@
 ---
 artifact: ${project.groupId}:${project.artifactId}:${project.version}
 name: "JDBC Driver - Singlestore"
+description: "SingleStore is a distributed SQL database built from the ground up for maximum performance for transactions and analytics"
 metadata:
   keywords:
     - "jdbc-singlestore"

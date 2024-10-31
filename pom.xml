@@ -12,6 +12,7 @@
     <version>999-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Quarkus Jdbc Singlestore - Parent</name>
+    <description>SingleStore is a distributed SQL database built from the ground up for maximum performance for transactions and analytics. This extension adds a JDBC driver for SingleStore to Quarkus.</description>
 
     <modules>
         <module>deployment</module>

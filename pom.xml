@@ -28,7 +28,7 @@
 
     <properties>
         <quarkus.version>3.15.1</quarkus.version>
-        <singlestore-jdbc.version>1.2.5</singlestore-jdbc.version>
+        <singlestore-jdbc.version>1.2.7</singlestore-jdbc.version>
         <assertj-core.version>3.27.2</assertj-core.version>
     </properties>
 

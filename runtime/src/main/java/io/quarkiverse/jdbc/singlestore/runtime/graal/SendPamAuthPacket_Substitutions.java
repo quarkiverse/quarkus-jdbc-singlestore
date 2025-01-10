@@ -15,7 +15,7 @@ import com.singlestore.jdbc.client.socket.Writer;
 public final class SendPamAuthPacket_Substitutions {
 
     @Substitute
-    public void initialize(String authenticationData, byte[] seed, Configuration conf) {
+    public SendPamAuthPacket_Substitutions(String authenticationData, Configuration conf) {
         throw new UnsupportedOperationException("Authentication strategy 'dialog' is not supported in GraalVM");
     }
 

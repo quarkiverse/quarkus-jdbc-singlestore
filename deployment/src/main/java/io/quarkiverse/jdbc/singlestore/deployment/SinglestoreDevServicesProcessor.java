@@ -23,7 +23,7 @@ import io.quarkus.datasource.deployment.spi.DevServicesDatasourceProvider;
 import io.quarkus.datasource.deployment.spi.DevServicesDatasourceProviderBuildItem;
 import io.quarkus.deployment.annotations.BuildStep;
 import io.quarkus.deployment.builditem.DevServicesSharedNetworkBuildItem;
-import io.quarkus.deployment.dev.devservices.GlobalDevServicesConfig;
+import io.quarkus.deployment.dev.devservices.DevServicesConfig;
 import io.quarkus.devservices.common.ConfigureUtil;
 import io.quarkus.devservices.common.ContainerShutdownCloseable;
 import io.quarkus.devservices.common.Labels;
@@ -39,7 +39,7 @@ public class SinglestoreDevServicesProcessor {
     @BuildStep
     DevServicesDatasourceProviderBuildItem setupSinglestore(
             List<DevServicesSharedNetworkBuildItem> devServicesSharedNetworkBuildItem,
-            GlobalDevServicesConfig globalDevServicesConfig) {
+            DevServicesConfig globalDevServicesConfig) {
         return new DevServicesDatasourceProviderBuildItem(SinglestoreConstants.DB_KIND, new DevServicesDatasourceProvider() {
             @Override
             public RunningDevServicesDatasource startDatabase(Optional<String> username, Optional<String> password,
@@ -67,7 +67,7 @@ public class SinglestoreDevServicesProcessor {
 
                 containerConfig.getAdditionalJdbcUrlProperties().forEach(container::withUrlParam);
                 containerConfig.getCommand().ifPresent(container::setCommand);
-                containerConfig.getInitScriptPath().ifPresent(container::withInitScript);
+                containerConfig.getInitScriptPath().ifPresent(container::withInitScripts);
                 container.withDatabaseName("");// bypass for root user
                 container.start();
                 await().until(container::isHealthy);

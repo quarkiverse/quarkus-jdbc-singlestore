@@ -9,7 +9,7 @@
     </parent>
     <groupId>io.quarkiverse.jdbc</groupId>
     <artifactId>quarkus-jdbc-singlestore-parent</artifactId>
-    <version>1.0.3</version>
+    <version>999-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Quarkus Jdbc Singlestore - Parent</name>
     <description>SingleStore is a distributed SQL database built from the ground up for maximum performance for transactions and analytics. This extension adds a JDBC driver for SingleStore to Quarkus.</description>
@@ -23,7 +23,7 @@
         <connection>scm:git:git@github.com:quarkiverse/quarkus-jdbc-singlestore.git</connection>
         <developerConnection>scm:git:git@github.com:quarkiverse/quarkus-jdbc-singlestore.git</developerConnection>
         <url>https://github.com/quarkiverse/quarkus-jdbc-singlestore</url>
-        <tag>1.0.3</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <properties>

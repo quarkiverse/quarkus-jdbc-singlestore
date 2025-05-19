@@ -11,7 +11,7 @@ import io.quarkus.test.junit.QuarkusTest;
 public class JdbcSinglestoreResourceTest {
 
     @Test
-    public void testHelloEndpoint() {
+    public void testAgroalEndpoint() {
         given()
                 .when().get("/jdbc-singlestore/agroal")
                 .then()
@@ -20,7 +20,7 @@ public class JdbcSinglestoreResourceTest {
     }
 
     @Test
-    public void testAgoralEndpoint() {
+    public void testConnectionEndpoint() {
         given()
                 .when().get("/jdbc-singlestore/connection")
                 .then()

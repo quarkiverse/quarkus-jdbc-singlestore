@@ -17,7 +17,11 @@ public final class SinglestoreJDBCReflections {
         //Singlestore's connection process requires reflective read to all fields of Configuration and its Builder:
         reflectiveClass.produce(
                 ReflectiveClassBuildItem
-                        .builder("com.singlestore.jdbc.Configuration", "com.singlestore.jdbc.Configuration$Builder")
-                        .fields().build());
+                        .builder("com.singlestore.jdbc.Configuration")
+                        .fields().methods().build());
+
+        reflectiveClass.produce(ReflectiveClassBuildItem
+                .builder("com.singlestore.jdbc.Configuration$Builder")
+                .fields().methods().build());
     }
 }

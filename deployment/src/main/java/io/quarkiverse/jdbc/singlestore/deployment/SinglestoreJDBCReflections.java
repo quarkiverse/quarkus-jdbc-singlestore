@@ -18,7 +18,7 @@ public final class SinglestoreJDBCReflections {
         reflectiveClass.produce(
                 ReflectiveClassBuildItem
                         .builder("com.singlestore.jdbc.Configuration")
-                        .fields().methods().build());
+                        .fields().build());
 
         reflectiveClass.produce(ReflectiveClassBuildItem
                 .builder("com.singlestore.jdbc.Configuration$Builder")

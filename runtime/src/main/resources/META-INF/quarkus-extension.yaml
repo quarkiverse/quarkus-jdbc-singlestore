@@ -8,7 +8,7 @@ metadata:
     - "jdbc"
     - "singlestore"
   guide: "https://docs.quarkiverse.io/quarkus-jdbc-singlestore/dev/"
-  icon-url: "https://upload.wikimedia.org/wikipedia/en/f/f1/SingleStore_logo.png"
+  icon-url: "https://images.contentstack.io/v3/assets/bltac01ee6daa3a1e14/blt1c2b5b49b2a6e765/660fbc0fc3bc8b4365dd3b53/singlestore-horiztonal-lock-up-black.svg"
   categories:
     - "data"
   status: "preview"

@@ -5,7 +5,7 @@
     <parent>
         <groupId>io.quarkiverse.jdbc</groupId>
         <artifactId>quarkus-jdbc-singlestore-parent</artifactId>
-        <version>999-SNAPSHOT</version>
+        <version>1.2.0</version>
     </parent>
     <artifactId>quarkus-jdbc-singlestore-deployment</artifactId>
     <name>Quarkus Jdbc Singlestore - Deployment</name>

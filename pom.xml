@@ -27,7 +27,7 @@
     </scm>
 
     <properties>
-        <quarkus.version>3.25.1</quarkus.version>
+        <quarkus.version>3.25.3</quarkus.version>
         <singlestore-jdbc.version>1.2.8</singlestore-jdbc.version>
         <assertj-core.version>3.27.4</assertj-core.version>
     </properties>

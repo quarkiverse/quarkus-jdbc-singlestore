@@ -30,6 +30,7 @@
         <quarkus.version>3.27.1</quarkus.version>
         <singlestore-jdbc.version>1.2.9</singlestore-jdbc.version>
         <assertj-core.version>3.27.6</assertj-core.version>
+        <jdbc.version>1.21.3</jdbc.version>
     </properties>
 
     <dependencyManagement>
@@ -50,6 +51,11 @@
                 <groupId>org.assertj</groupId>
                 <artifactId>assertj-core</artifactId>
                 <version>${assertj-core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>jdbc</artifactId>
+                <version>${jdbc.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

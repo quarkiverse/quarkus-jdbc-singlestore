@@ -46,7 +46,7 @@ public class DevServicesSinglestoreDatasourceTestCase {
         AgroalConnectionPoolConfiguration configuration = reference.get();
         assertThat(configuration.connectionFactoryConfiguration().jdbcUrl()).contains("jdbc:singlestore:");
         assertThat(configuration.connectionFactoryConfiguration().principal().getName()).isEqualTo("quarkus");
-        assertThat(configuration.maxSize()).isEqualTo(20);
+        assertThat(configuration.maxSize()).isIn(20, 50);// Complies with latest snapshot i.e 20 -> 50
         assertThat(configuration.exceptionSorter()).isInstanceOf(MySQLExceptionSorter.class);
         assertThatCode(() -> dataSource.getConnection().close()).doesNotThrowAnyException();
     }

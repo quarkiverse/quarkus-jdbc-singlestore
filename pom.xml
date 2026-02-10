@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -12,7 +13,9 @@
     <version>999-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Quarkus Jdbc Singlestore - Parent</name>
-    <description>SingleStore is a distributed SQL database built from the ground up for maximum performance for transactions and analytics. This extension adds a JDBC driver for SingleStore to Quarkus.</description>
+    <description>SingleStore is a distributed SQL database built from the ground up for maximum performance for
+        transactions and analytics. This extension adds a JDBC driver for SingleStore to Quarkus.
+    </description>
 
     <modules>
         <module>deployment</module>
@@ -27,7 +30,7 @@
     </scm>
 
     <properties>
-        <quarkus.version>3.27.1</quarkus.version>
+        <quarkus.version>3.32.0</quarkus.version>
         <singlestore-jdbc.version>1.2.9</singlestore-jdbc.version>
         <assertj-core.version>3.27.7</assertj-core.version>
         <jdbc.version>1.21.4</jdbc.version>

@@ -9,8 +9,9 @@ import org.testcontainers.containers.JdbcDatabaseContainer;
 import org.testcontainers.containers.startupcheck.MinimumDurationRunningStartupCheckStrategy;
 import org.testcontainers.shaded.com.google.common.collect.Sets;
 import org.testcontainers.utility.DockerImageName;
+import org.testcontainers.utility.MountableFile;
 
-public class SinglestoreContainer extends JdbcDatabaseContainer<SinglestoreContainer> {
+public abstract class SinglestoreContainer extends JdbcDatabaseContainer<SinglestoreContainer> {
     static final String FULL_IMAGE_NAME = "ghcr.io/singlestore-labs/singlestoredb-dev";
     private static final DockerImageName DEFAULT_IMAGE_NAME = DockerImageName.parse(FULL_IMAGE_NAME);
     static final Integer SINGLESTORE_PORT = 3306;
@@ -44,6 +45,8 @@ public class SinglestoreContainer extends JdbcDatabaseContainer<SinglestoreConta
     protected void configure() {
         if (this.rootPassword != null && !this.rootPassword.isEmpty()) {
             this.addEnv("ROOT_PASSWORD", this.rootPassword);
+            this.withCopyFileToContainer(
+                    MountableFile.forClasspathResource("init.sql"), "init.sql");
         } else {
             if (!"root".equalsIgnoreCase(this.rootUsername)) {
                 throw new ContainerLaunchException("Empty password can be used only with the root user");
@@ -61,14 +64,6 @@ public class SinglestoreContainer extends JdbcDatabaseContainer<SinglestoreConta
         String additionalUrlParams = this.constructUrlParameters("?", "&");
         return "jdbc:singlestore://" + this.getHost() + ":" + this.getMappedPort(SINGLESTORE_PORT) + "/" + getDatabaseName()
                 + additionalUrlParams;
-    }
-
-    public String getUsername() {
-        return this.rootUsername;
-    }
-
-    public String getPassword() {
-        return this.rootPassword;
     }
 
     @Override

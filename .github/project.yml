@@ -1,3 +1,5 @@
+# project.yml has to change in this PR so Prepare Release runs.
+# 1.3.3 was already recorded in #167 while the POMs were still release 1.3.2.
 release:
   current-version: "1.3.3"
   next-version: "999-SNAPSHOT"

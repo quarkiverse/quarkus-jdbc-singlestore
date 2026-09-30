@@ -31,8 +31,6 @@
         <singlestore-jdbc.version>1.2.12</singlestore-jdbc.version>
         <assertj-core.version>3.27.7</assertj-core.version>
         <jdbc.version>1.21.4</jdbc.version>
-        <!-- Surefire 3.6.0 from parent 23 deadlocks Quarkus test discovery on a cold Maven cache. -->
-        <version.surefire.plugin>3.5.6</version.surefire.plugin>
     </properties>
 
     <dependencyManagement>

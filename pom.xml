@@ -27,6 +27,7 @@
     </scm>
 
     <properties>
+        <maven.compiler.release>21</maven.compiler.release>
         <quarkus.version>3.33.4</quarkus.version>
         <singlestore-jdbc.version>1.2.12</singlestore-jdbc.version>
         <assertj-core.version>3.27.7</assertj-core.version>

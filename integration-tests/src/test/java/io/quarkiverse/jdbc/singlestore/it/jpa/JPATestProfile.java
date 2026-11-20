@@ -8,6 +8,6 @@ import io.quarkus.test.junit.QuarkusTestProfile;
 public class JPATestProfile implements QuarkusTestProfile {
     @Override
     public Map<String, String> getConfigOverrides() {
-        return Collections.singletonMap("quarkus.hibernate-orm.database.generation", "drop-and-create");
+        return Collections.singletonMap("quarkus.hibernate-orm.schema-management.strategy", "drop-and-create");
     }
 }

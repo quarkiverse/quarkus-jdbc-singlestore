@@ -10,6 +10,24 @@
 Quarkus Jdbc Singlestore is a Quarkus extension for the Singlestore jdbc driver.For more information about
 the Singlestore, please refer [Singlestore](https://www.singlestore.com/)
 
+## Compatibility
+
+Each release is built and tested against one Quarkus version, one Java level, and one SingleStore JDBC client.
+
+| Extension | Quarkus | Java | SingleStore JDBC |
+| --- | --- | --- | --- |
+| 1.6.0 | 3.40.1.2 | 21 | 1.2.12 |
+| 1.5.3 | 3.33.4.1 | 21 | 1.2.12 |
+| 1.5.0 – 1.5.2 | 3.33.2 – 3.33.4 | 17 | 1.2.11 – 1.2.12 |
+| 1.4.0 | 3.32.4 | 17 | 1.2.9 |
+| 1.3.0 – 1.3.3 | 3.27.0 – 3.27.6 | 17 | 1.2.8 – 1.2.9 |
+| 1.2.0 | 3.25.1 | 17 | 1.2.8 |
+| 1.1.0 | 3.20.0 | 17 | 1.2.8 |
+| 1.0.3 | 3.19.3 | 17 | 1.2.7 |
+| 1.0.0 – 1.0.2 | 3.15.1 | 17 | 1.2.5 |
+
+The current source on `main` targets Quarkus 4.0.0, Java 21, and SingleStore JDBC 1.2.12. That line is not released yet.
+
 ## Getting Started
 Add the following dependency in your pom.xml to get started,
 

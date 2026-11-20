@@ -16,12 +16,12 @@ import org.junit.jupiter.api.extension.RegisterExtension;
 import io.agroal.api.AgroalDataSource;
 import io.agroal.api.configuration.AgroalConnectionPoolConfiguration;
 import io.agroal.api.exceptionsorter.MySQLExceptionSorter;
-import io.quarkus.test.QuarkusUnitTest;
+import io.quarkus.test.QuarkusExtensionTest;
 
 public class DevServicesSinglestoreDatasourceTestCase {
 
     @RegisterExtension
-    static QuarkusUnitTest test = new QuarkusUnitTest()
+    static QuarkusExtensionTest test = new QuarkusExtensionTest()
             .withEmptyApplication()
             //            .overrideRuntimeConfigKey("singlestore.image","test")
             //            .overrideRuntimeConfigKey("quarkus.datasource.db-kind","singlestore")
